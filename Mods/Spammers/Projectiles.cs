@@ -1006,7 +1006,7 @@ namespace iiMenu.Mods.Spammers
 
         public static void ProjectileLagPlayer(VRRig player) => ProjectileLagPlayer(GetPlayerFromVRRig(player));
 
-        public static void ServersidedTracers()                                                                                                                                                                                                                                                                              //hi
+        public static void ServersidedTracers()
         {
             int num = 15 * 2;
             string projectileName = Projectiles.ProjectileObjectNames[num];
