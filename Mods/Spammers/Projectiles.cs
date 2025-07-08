@@ -1005,5 +1005,64 @@ namespace iiMenu.Mods.Spammers
         }
 
         public static void ProjectileLagPlayer(VRRig player) => ProjectileLagPlayer(GetPlayerFromVRRig(player));
+
+        public static void ServersidedTracers()                                                                                                                                                                                                                                                                              //hi
+        {
+            int num = 15 * 2;
+            string projectileName = Projectiles.ProjectileObjectNames[num];
+            bool flag = false;
+            using (List<VRRig>.Enumerator enumerator = GorillaParent.instance.vrrigs.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    if (PlayerIsTagged(enumerator.Current))
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+            if (flag)
+            {
+                if (!PlayerIsTagged(VRRig.LocalRig))
+                {
+                    VRRig randomVRRig = RigManager.GetRandomVRRig(false);
+                    if (PlayerIsTagged(randomVRRig) && randomVRRig != VRRig.LocalRig)
+                    {
+                        Vector3 position = GorillaTagger.Instance.rightHandTransform.position;
+                        Vector3 vector = randomVRRig.transform.position - GorillaTagger.Instance.rightHandTransform.position;
+                        vector.Normalize();
+                        vector *= 100f;
+                        Projectiles.BetaFireProjectile(projectileName, position, vector, new Color32(0, byte.MaxValue, 0, byte.MaxValue));
+                        return;
+                    }
+                }
+                else
+                {
+                    VRRig randomVRRig2 = RigManager.GetRandomVRRig(false);
+                    if (!PlayerIsTagged(randomVRRig2) && randomVRRig2 != VRRig.LocalRig)
+                    {
+                        Vector3 position2 = GorillaTagger.Instance.rightHandTransform.position;
+                        Vector3 vector2 = randomVRRig2.transform.position - GorillaTagger.Instance.rightHandTransform.position;
+                        vector2.Normalize();
+                        vector2 *= 100f;
+                        Projectiles.BetaFireProjectile(projectileName, position2, vector2, new Color32(0, byte.MaxValue, 0, byte.MaxValue));
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                VRRig randomVRRig3 = RigManager.GetRandomVRRig(false);
+                if (randomVRRig3 != VRRig.LocalRig)
+                {
+                    Vector3 position3 = GorillaTagger.Instance.rightHandTransform.position;
+                    Vector3 vector3 = randomVRRig3.transform.position - GorillaTagger.Instance.rightHandTransform.position;
+                    vector3.Normalize();
+                    vector3 *= 100f;
+                    Projectiles.BetaFireProjectile(projectileName, position3, vector3, new Color32(0, byte.MaxValue, 0, byte.MaxValue));
+                }
+            }
+        }
     }
 }
